@@ -1,0 +1,18 @@
+<launch>
+  <node pkg="sc_ct_icp" type="SC_PGO" name="SC_PGO" output="screen" />
+
+  <arg name="rviz" default="true" />
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz"
+      args="-d $(find sc_ct_icp)/rviz_cfg/aloam_velodyne.rviz" />
+  </group>
+
+  <node pkg="sc_ct_icp" type="pub_pcd" name="pub_pcd" output="screen">
+    <param name="filePath" type="string" value="/media/sam/data/KITTI/KITTI_CTICP_LC/"/>
+  </node>
+
+  <node pkg="sc_ct_icp" type="log_sc_cticp" name="log_sc_cticp" output="screen">
+    <param name="logPath" type="string" value="/home/sam/Desktop/test/"/>
+  </node>
+
+</launch>
